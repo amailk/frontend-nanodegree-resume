@@ -2,6 +2,15 @@
 This is empty on purpose! Your code to build the resume will go here.
  */
 
+var charEscape = function(_html) {
+    var newHTML = _html;
+
+    newHTML = _html.replace(/</g, "&lt;");
+    newHTML = newHTML.replace(/>/g, "&gt;");
+
+    return newHTML;
+};
+
 var bio = {
     "name" : "Ama Liyanage",
     "role" : "Web Developer",
@@ -18,6 +27,19 @@ var bio = {
     ],
     "bioPic": "images/me.jpg"
 }
+
+var formattedName = HTMLheaderName.replace("%data%",bio.name);
+var formattedRole = HTMLheaderRole.replace("%data%",bio.role);
+var formattedHeader = formattedName + formattedRole;
+$("#header").prepend(formattedHeader);
+
+$("#topContacts").append(HTMLmobile.replace("%data%",bio.contacts.mobile));
+$("#topContacts").append(HTMLemail.replace("%data%",bio.contacts.email));
+$("#topContacts").append(HTMLgithub.replace("%data%",bio.contacts.github));
+$("#topContacts").append(HTMLtwitter.replace("%data%",bio.contacts.twitter));
+$("#topContacts").append(HTMLlocation.replace("%data%",bio.contacts.location));
+$("#header").append(HTMLbioPic.replace("%data%",bio.bioPic));
+$("#header").append(HTMLwelcomeMsg.replace("%data%",bio.welcomeMessage));
 
 var education = {
     "schools": [
@@ -84,16 +106,6 @@ var projects = {
 }
 
 
-var charEscape = function(_html) {
-    var newHTML = _html;
-
-    newHTML = _html.replace(/</g, "&lt;");
-    newHTML = newHTML.replace(/>/g, "&gt;");
-
-    return newHTML;
-};
-
-
 if(bio.skills.length >0) {
     $("#header").append(HTMLskillsStart);
 
@@ -107,24 +119,24 @@ if(bio.skills.length >0) {
     formattedSkill = HTMLskills.replace("%data%",bio.skills[3]);
 }
 
+function displayWork() {
 
-for (job in work.jobs) {
+    for (job in work.jobs) {
 
-    $("#workExperience").append(HTMLworkStart);
+        $("#workExperience").append(HTMLworkStart);
 
-    var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-    var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-    var formattedEmployerTitle = formattedEmployer + formattedTitle;
-
-
-    $(".work-entry:last").append(formattedEmployerTitle);
+        var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+        var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+        var formattedEmployerTitle = formattedEmployer + formattedTitle;
+        $(".work-entry:last").append(formattedEmployerTitle);
 
 
-    var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-    $(".work-entry:last").append(formattedDates);
+        var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+        $(".work-entry:last").append(formattedDates);
 
-    var formattedDescription = HTMLworkDescription.replace("%data%",work.jobs[job].description);
-
-    $(".work-entry:last").append(formattedDescription);
+        var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+        $(".work-entry:last").append(formattedDescription);
+    }
 }
 
+displayWork();
