@@ -41,6 +41,21 @@ $("#topContacts").append(HTMLlocation.replace("%data%",bio.contacts.location));
 $("#header").append(HTMLbioPic.replace("%data%",bio.bioPic));
 $("#header").append(HTMLwelcomeMsg.replace("%data%",bio.welcomeMessage));
 
+
+if(bio.skills.length >0) {
+    $("#header").append(HTMLskillsStart);
+
+    var formattedSkill = HTMLskills.replace("" +
+        "%data%", bio.skills[0]);
+    $("#skills").append(formattedSkill);
+    formattedSkill = HTMLskills.replace("%data%",bio.skills[1]);
+    $("#skills").append(formattedSkill);
+    formattedSkill = HTMLskills.replace("%data%",bio.skills[2]);
+    $("#skills").append(formattedSkill);
+    formattedSkill = HTMLskills.replace("%data%",bio.skills[3]);
+}
+
+
 var education = {
     "schools": [
         {
@@ -69,6 +84,30 @@ var education = {
         }
     ]
 }
+
+function displayEducation() {
+
+    for (school in education.schools) {
+
+        $("#education").append(HTMLschoolStart);
+
+        var formattedschoolName = HTMLschoolName.replace("%data%", education.schools[school].name)
+        var formattedCity = HTMLschoolLocation.replace("%data%",education.schools[school].city);
+        var formattedMajor = HTMLschoolMajor.replace("%data%",education.schools[school].majors);
+        var formattedDegree = HTMLschoolDegree.replace("%data%",education.schools[school].degree);
+
+        var formattedSchool = formattedschoolName + formattedCity + formattedMajor + formattedDegree;
+
+        $(".education-entry:last").append(formattedSchool);
+
+        var formattedDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
+        $(".education-entry:last").append(formattedDates);
+
+    }
+
+}
+
+displayEducation();
 var work = {
     "jobs": [
         {
@@ -86,37 +125,6 @@ var work = {
             "description": "Did blah blah and blah, and more blah."
         }
     ]
-}
-
-var projects = {
-    "eachproject": [
-        {
-            "title": "Portkey",
-            "images":["images/portkey.jpg"],
-            "dates": 2015,
-            "description": "Travel App"
-        },
-        {
-            "title": "Coolzone Automart",
-            "images": ["images/coolzone.jpg" ],
-            "dates": 2016,
-            "description": "Website for garage small business"
-        }
-    ]
-}
-
-
-if(bio.skills.length >0) {
-    $("#header").append(HTMLskillsStart);
-
-    var formattedSkill = HTMLskills.replace("" +
-        "%data%", bio.skills[0]);
-    $("#skills").append(formattedSkill);
-    formattedSkill = HTMLskills.replace("%data%",bio.skills[1]);
-    $("#skills").append(formattedSkill);
-    formattedSkill = HTMLskills.replace("%data%",bio.skills[2]);
-    $("#skills").append(formattedSkill);
-    formattedSkill = HTMLskills.replace("%data%",bio.skills[3]);
 }
 
 function displayWork() {
@@ -140,3 +148,45 @@ function displayWork() {
 }
 
 displayWork();
+
+var projects = {
+    "eachproject": [
+        {
+            "title": "Portkey",
+            "images":["images/portkey.jpg"],
+            "dates": 2015,
+            "description": "Travel App"
+        },
+        {
+            "title": "Coolzone Automart",
+            "images": ["images/coolzone.jpg" ],
+            "dates": 2016,
+            "description": "Website for garage small business"
+        }
+    ]
+}
+
+function displayProjects() {
+
+    for (project in projects.eachproject) {
+
+        $("#projects").append(HTMLprojectStart);
+
+        var formattedprojectTitle = HTMLprojectTitle.replace("%data%", projects.eachproject[project].title);
+        var formattedImages = HTMLprojectImage.replace("%data%", projects.eachproject[project].images);
+        var formattedProject = formattedprojectTitle + formattedImages;
+        $(".project-entry:last").append(formattedProject);
+
+
+        var formattedprojectDates = HTMLprojectDates.replace("%data%", projects.eachproject[project].dates);
+        $(".project-entry:last").append(formattedprojectDates);
+        var formattedprojectDescription = HTMLprojectDescription.replace("%data%", projects.eachproject[project].description);
+        $(".project-entry:last").append(formattedprojectDescription);
+
+    }
+
+}
+
+displayProjects();
+
+
