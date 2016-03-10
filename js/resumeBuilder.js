@@ -150,7 +150,7 @@ function displayWork() {
 displayWork();
 
 var projects = {
-    "eachproject": [
+    "projects": [
         {
             "title": "Portkey",
             "images":["images/portkey.jpg"],
@@ -166,28 +166,7 @@ var projects = {
     ]
 }
 
-function displayProjects() {
 
-    for (project in projects.eachproject) {
-
-        $("#projects").append(HTMLprojectStart);
-
-        var formattedprojectTitle = HTMLprojectTitle.replace("%data%", projects.eachproject[project].title);
-        var formattedImages = HTMLprojectImage.replace("%data%", projects.eachproject[project].images);
-        var formattedProject = formattedprojectTitle + formattedImages;
-        $(".project-entry:last").append(formattedProject);
-
-
-        var formattedprojectDates = HTMLprojectDates.replace("%data%", projects.eachproject[project].dates);
-        $(".project-entry:last").append(formattedprojectDates);
-        var formattedprojectDescription = HTMLprojectDescription.replace("%data%", projects.eachproject[project].description);
-        $(".project-entry:last").append(formattedprojectDescription);
-
-    }
-
-}
-
-displayProjects();
 
 function inName(name) {
     name = name.trim().split(" ");
@@ -201,3 +180,28 @@ function inName(name) {
 
 
 $("#main").append(internationalizeButton);
+
+
+
+projects.display = function() {
+    for (project in projects.projects) {
+        $("#projects").append(HTMLprojectStart);
+
+        var formattedTitle = HTMLprojectTitle.replace("%data%",projects.projects[project].title);
+        $(".project-entry:last").append(formattedTitle);
+
+        var formattedDates = HTMLprojectDates.replace("%data%",projects.projects[project].dates);
+        $(".project-entry:last").append(formattedDates);
+
+        var formattedDescription = HTMLprojectDescription.replace("%data%",projects.projects[project].description);
+        $(".project-entry:last").append(formattedDescription);
+
+
+        if (projects.projects[project].images.length >0) {
+            for (image in projects.projects[project].images) {
+                var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
+                $(".project-entry:last").append(formattedImage);
+            }
+        }
+    }
+}
