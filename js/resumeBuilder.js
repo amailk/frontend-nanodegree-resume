@@ -2,59 +2,56 @@
 This is empty on purpose! Your code to build the resume will go here.
  */
 
-var charEscape = function(_html) {
-    var newHTML = _html;
-
-    newHTML = _html.replace(/</g, "&lt;");
-    newHTML = newHTML.replace(/>/g, "&gt;");
-
-    return newHTML;
-};
-
 var bio = {
     "name" : "Ama Liyanage",
     "role" : "Web Developer",
-    "contacts": {
+    "contacts": [{
         "mobile" : "647-702-9040",
         "email": "liyaniama@gmail.com",
         "github": "amailk",
         "twitter": "@amailk",
         "location": "Toronto"
-    },
+    }],
+    "bioPic": "images/me.jpg",
     "welcomeMessage": "Hello! welcome to my resume",
-    "skills" : [
-        "HTML", "CSS", "JavaScript"
-    ],
-    "bioPic": "images/me.jpg"
-}
+    "skills" : ["HTML", "CSS", "JavaScript", "Painting", "Photography"]
+};
 
-var formattedName = HTMLheaderName.replace("%data%",bio.name);
-var formattedRole = HTMLheaderRole.replace("%data%",bio.role);
-var formattedHeader = formattedName + formattedRole;
-$("#header").prepend(formattedHeader);
+var work = {
+    "jobs": [
+        {
+            "employer": "Google",
+            "title": "Junior Front End Developer",
+            "location": "New York",
+            "dates": "2014-2015",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse",
+            "url": "www.google.com"
+        },
+        {
+            "employer": "Amazon",
+            "title": "Front End Developer",
+            "location": "Seattle",
+            "dates": "2015-2016",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse",
+            "url": "www.amazon.com"
+        }]
+};
 
-$("#topContacts").append(HTMLmobile.replace("%data%",bio.contacts.mobile));
-$("#topContacts").append(HTMLemail.replace("%data%",bio.contacts.email));
-$("#topContacts").append(HTMLgithub.replace("%data%",bio.contacts.github));
-$("#topContacts").append(HTMLtwitter.replace("%data%",bio.contacts.twitter));
-$("#topContacts").append(HTMLlocation.replace("%data%",bio.contacts.location));
-$("#header").append(HTMLbioPic.replace("%data%",bio.bioPic));
-$("#header").append(HTMLwelcomeMsg.replace("%data%",bio.welcomeMessage));
-
-
-if(bio.skills.length >0) {
-    $("#header").append(HTMLskillsStart);
-
-    var formattedSkill = HTMLskills.replace("" +
-        "%data%", bio.skills[0]);
-    $("#skills").append(formattedSkill);
-    formattedSkill = HTMLskills.replace("%data%",bio.skills[1]);
-    $("#skills").append(formattedSkill);
-    formattedSkill = HTMLskills.replace("%data%",bio.skills[2]);
-    $("#skills").append(formattedSkill);
-    formattedSkill = HTMLskills.replace("%data%",bio.skills[3]);
-}
-
+var projects = {
+    "project": [
+        {
+            "title": "Portkey",
+            "images":["images/portkey.jpg"],
+            "dates": "2015",
+            "description": "Travel makes one modest. You see what a tiny place you occupy in the world. – Gustave Flaubert. Travel App that lets you track your travels, eats, stays and activities"
+        },
+        {
+            "title": "Coolzone Automart",
+            "images": ["images/coolzone.jpg"],
+            "dates": "2016",
+            "description": "Website for a garage small business that is based in Sri Lanka. Offering quick and efficient services to keep you on the road"
+        }]
+};
 
 var education = {
     "schools": [
@@ -63,71 +60,82 @@ var education = {
             "city": "Toronto",
             "degree": "Honors Bachelor of Science",
             "majors": ["Biology", "Psychology"],
-            "dates": 2010 - 2015,
+            "dates": "2010 - 2015",
             "url": "https://www.utoronto.ca/"
 
-        }
-    ],
+        }],
 
-    "online courses": [
+    "onlinecourses": [
         {
             "title": "Into to Programming",
             "school": "Udacity",
-            "dates": 2015,
+            "dates": "2015-2016",
             "url": "https://www.udacity.com/course/intro-to-programming-nanodegree--nd000"
         },
         {
             "title": "Front End Development",
             "school": "Udacity",
-            "dates": 2016,
+            "dates": "2016-Present",
             "url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
-        }
-    ]
-}
+        }]
+};
 
-function displayEducation() {
+bio.display = function() {
+    var formattedName = HTMLheaderName.replace("%data%", bio.name);
+    var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+    var formattedbioPic = HTMLbioPic.replace("%data%", bio.bioPic);
+    var formattedwelcomeMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+
+    $("#header").prepend(formattedRole).prepend(formattedName).append(formattedbioPic, formattedwelcomeMessage);
+    $("#header").append(HTMLskillsStart);
+    if(bio.skills.length>0) {
+        $("#header").append(HTMLskillsStart);
+        for (var skill = 0; skill < bio.skills.length; skill++) {
+            $("#skills").append(HTMLskills.replace("%data%", bio.skills[skill]));
+        }
+    }
+
+    for (contact in bio.contacts) {
+
+        var formattedMobile = HTMLmobile.replace("%data%", bio.contacts[contact].mobile);
+        var formattedEmail = HTMLemail.replace("%data%", bio.contacts[contact].email);
+        var formattedGithub = HTMLgithub.replace("%data%", bio.contacts[contact].github);
+        var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts[contact].twitter);
+        var formattedLocation = HTMLlocation.replace("%data%", bio.contacts[contact].location);
+        $("#topContacts").append(formattedMobile, formattedEmail, formattedGithub, formattedTwitter, formattedLocation);
+    };
+};
+
+
+education.display = function() {
 
     for (school in education.schools) {
 
         $("#education").append(HTMLschoolStart);
 
-        var formattedschoolName = HTMLschoolName.replace("%data%", education.schools[school].name)
+        var formattedschoolName = HTMLschoolName.replace("%data%", education.schools[school].name);
+        var formattedDegree = HTMLschoolDegree.replace("%data%",education.schools[school].degree);
+        var formattedDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
         var formattedCity = HTMLschoolLocation.replace("%data%",education.schools[school].city);
         var formattedMajor = HTMLschoolMajor.replace("%data%",education.schools[school].majors);
-        var formattedDegree = HTMLschoolDegree.replace("%data%",education.schools[school].degree);
 
-        var formattedSchool = formattedschoolName + formattedCity + formattedMajor + formattedDegree;
 
-        $(".education-entry:last").append(formattedSchool);
-
-        var formattedDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
-        $(".education-entry:last").append(formattedDates);
+        $(".education-entry:last").append(formattedschoolName + formattedDegree,formattedDates,formattedCity,formattedMajor);
 
     }
+    for (onlinecourse in education.onlinecourses) {
 
-}
+        $("#education").append(HTMLonlineClasses);
 
-displayEducation();
-var work = {
-    "jobs": [
-        {
-            "employer": "Google",
-            "title": "Junior Front End Developer",
-            "location": "Waterloo",
-            "dates": 2015,
-            "description": "Was responsible for blah blah blah"
-        },
-        {
-            "employer": "Amazon",
-            "title": "Front End Developer",
-            "location": "Toronto",
-            "dates": 2016,
-            "description": "Did blah blah and blah, and more blah."
-        }
-    ]
-}
+        var formattedTitle = HTMLonlineTitle.replace("%data%",education.onlinecourses[onlinecourse].title);
+        var formattedSchool = HTMLonlineSchool.replace("%data%",education.onlinecourses[onlinecourse].school);
+        var formattedDates = HTMLonlineDates.replace("%data%", education.onlinecourses[onlinecourse].dates);
+        $(".education-entry:last").append(formattedSchool, formattedTitle, formattedDates);
+    }
+};
 
-function displayWork() {
+
+work.display = function() {
 
     for (job in work.jobs) {
 
@@ -135,73 +143,49 @@ function displayWork() {
 
         var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
         var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-        var formattedEmployerTitle = formattedEmployer + formattedTitle;
-        $(".work-entry:last").append(formattedEmployerTitle);
-
-
         var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-        $(".work-entry:last").append(formattedDates);
-
         var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
-        $(".work-entry:last").append(formattedDescription);
+        var formattedworkLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+
+        $(".work-entry:last").append(formattedEmployer + formattedTitle,formattedDates,formattedworkLocation,formattedDescription);
+
     }
-}
+};
 
-displayWork();
+projects.display = function() {
+    for (item in projects.project) {
+        $("#projects").append(HTMLprojectStart);
 
-var projects = {
-    "projects": [
-        {
-            "title": "Portkey",
-            "images":["images/portkey.jpg"],
-            "dates": 2015,
-            "description": "Travel App"
-        },
-        {
-            "title": "Coolzone Automart",
-            "images": ["images/coolzone.jpg" ],
-            "dates": 2016,
-            "description": "Website for garage small business"
-        }
-    ]
-}
+        var formattedTitle = HTMLprojectTitle.replace("%data%",projects.project[item].title);
+        var formattedDates = HTMLprojectDates.replace("%data%",projects.project[item].dates);
+        var formattedDescription = HTMLprojectDescription.replace("%data%",projects.project[item].description);
+        $(".project-entry:last").append(formattedTitle,formattedDates,formattedDescription);
 
+
+        if (projects.project[item].images.length >0) {
+            for (image in projects.project[item].images) {
+                var formattedImage = HTMLprojectImage.replace("%data%", projects.project[item].images[image]);
+                $(".project-entry:last").append(formattedImage);
+            }
+        };
+    }
+};
 
 
 function inName(name) {
-    name = name.trim().split(" ");
     console.log(name);
-    name[1] = name[1].toUpperCase();
-    name[0] = name[0].slice(0,1).toUpperCase() +
-        name[0].slice(1).toLowerCase();
+    var newName = name;
+    newName = newName[0].toUpperCase() + newName.slice(1, newName.indexOf(" ") + 1).toLowerCase() + newName.slice(newName.indexOf(" ") + 1).toUpperCase();
 
-    return name[0] + " " + name[1];
-}
+    return newName;
+
+};
+
+bio.display();
+work.display();
+projects.display();
+education.display();
 
 
 $("#main").append(internationalizeButton);
-
-
-
-projects.display = function() {
-    for (project in projects.projects) {
-        $("#projects").append(HTMLprojectStart);
-
-        var formattedTitle = HTMLprojectTitle.replace("%data%",projects.projects[project].title);
-        $(".project-entry:last").append(formattedTitle);
-
-        var formattedDates = HTMLprojectDates.replace("%data%",projects.projects[project].dates);
-        $(".project-entry:last").append(formattedDates);
-
-        var formattedDescription = HTMLprojectDescription.replace("%data%",projects.projects[project].description);
-        $(".project-entry:last").append(formattedDescription);
-
-
-        if (projects.projects[project].images.length >0) {
-            for (image in projects.projects[project].images) {
-                var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
-                $(".project-entry:last").append(formattedImage);
-            }
-        }
-    }
-}
+$("#mapDiv").append(googleMap);
