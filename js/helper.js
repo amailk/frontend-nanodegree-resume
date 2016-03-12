@@ -44,10 +44,10 @@ var HTMLprojectImage = '<img src="%data%">';
 
 var HTMLschoolStart = '<div class="education-entry"></div>';
 var HTMLschoolName = '<a href="#">%data%';
-var HTMLschoolDegree = ' - %data%</a>';
+var HTMLschoolDegree = ' -- %data%</a>';
 var HTMLschoolDates = '<div class="date-text">%data%</div>';
 var HTMLschoolLocation = '<div class="location-text">%data%</div>';
-var HTMLschoolMajor = '<em><br>Majors: %data%</em>';
+var HTMLschoolMajor = '<em><br>Major: %data%</em>';
 
 var HTMLonlineClasses = '<h3>Online Classes</h3>';
 var HTMLonlineTitle = '<a href="#">%data%';
@@ -106,7 +106,7 @@ function initializeMap() {
   var locations;
 
   var mapOptions = {
-    disableDefaultUI: false
+    disableDefaultUI: true
   };
 
   /* 
@@ -126,7 +126,7 @@ function initializeMap() {
     var locations = [];
 
     // adds the single location property from bio to the locations array
-    locations.push(bio.contacts[contact].location);
+    locations.push(bio.contacts[0].location);
 
     // iterates through school locations and appends each location to
     // the locations array. Note that forEach is used for array iteration

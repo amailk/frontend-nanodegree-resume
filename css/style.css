@@ -22,11 +22,12 @@ h6 {
 .work-entry,
 .project-entry {
   padding: 0 5%;
+  overflow: auto;
 }
 
 h1 {
   font-size: 40px;
-  color: #f5a623;
+  color: #a6a6a6;
   line-height: 48px;
   display: inline;
 }
@@ -100,16 +101,16 @@ a {
 }
 
 #skills-h3 {
-  color: #f5ae23;
+  color: #ffccdd;
   display: none;
 }
 
 .orange {
-  background-color: #f5ae23;
+  background-color: #ffccdd;
 }
 
 .orange-text {
-  color: #f5ae23;
+  color: #ffccdd;
 }
 
 .white-text {
