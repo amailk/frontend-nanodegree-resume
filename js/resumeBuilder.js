@@ -37,15 +37,24 @@ var projects = {
     "projects": [
         {
             "title": "Portkey",
+            "url": "https://github.com/amailk/PortKey",
             "images":["images/portkey.jpg"],
             "dates": "2015",
             "description": "Travel makes one modest. You see what a tiny place you occupy in the world. – Gustave Flaubert. Travel App that lets you track your travels, eats, stays and activities"
         },
         {
             "title": "Coolzone Automart",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
             "images": ["images/coolzone.jpg"],
             "dates": "2016",
             "description": "Website for a garage small business that is based in Sri Lanka. Offering quick and efficient services to keep you on the road"
+        },
+        {
+            "title": "Writer's Block",
+            "url": "https://github.com/amailk/the-writers-block",
+            "images":["images/writersblock.jpg"],
+            "dates":"2016",
+            "description" : "Writer's block is a blog page displaying a young writer's work over the years."
         }]
 };
 
@@ -100,6 +109,7 @@ bio.display = function() {
         var formattedTwitter = HTMLtwitter.replace("%data%", contact.twitter);
         var formattedLocation = HTMLlocation.replace("%data%", contact.location);
         $("#topContacts").append(formattedMobile, formattedEmail, formattedGithub, formattedTwitter, formattedLocation);
+        $("#footerContacts").append(formattedMobile, formattedEmail, formattedGithub, formattedTwitter, formattedLocation);
     };
 };
 
@@ -162,6 +172,7 @@ projects.display = function() {
         $("#projects").append(HTMLprojectStart);
 
         var formattedTitle = HTMLprojectTitle.replace("%data%",project.title);
+        formattedTitle = formattedTitle.replace("#",project.url);
         var formattedDates = HTMLprojectDates.replace("%data%",project.dates);
         var formattedDescription = HTMLprojectDescription.replace("%data%",project.description);
         $(".project-entry:last").append(formattedTitle,formattedDates,formattedDescription);
@@ -170,7 +181,7 @@ projects.display = function() {
         if (project.images.length >0) {
             for (image in project.images) {
                 var formattedImage = HTMLprojectImage.replace("%data%", project.images[image]);
-                $(".project-entry:last").append(formattedImage);
+                $(".project-entry:last").prepend(formattedImage);
             }
         };
     }
