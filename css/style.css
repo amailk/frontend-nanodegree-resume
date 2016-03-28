@@ -27,7 +27,7 @@ h6 {
 
 h1 {
   font-size: 40px;
-  color: #a6a6a6;
+  color: #ffe6ff;
   line-height: 48px;
   display: inline;
 }
@@ -41,9 +41,8 @@ h2 {
 }
 
 h3 {
-  font-style: italic;
   font-size: 20px;
-  color: #000;
+  color: #999998;
   line-height: 22px;
 }
 

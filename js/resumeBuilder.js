@@ -2,7 +2,7 @@ var bio = {
     "name" : "Ama Liyanage",
     "role" : "Web Developer",
     "contacts": [{
-        "mobile" : "647-702-9040",
+        "mobile" : "000-000-0000",
         "email": "liyaniama@gmail.com",
         "github": "amailk",
         "twitter": "@amailk",
