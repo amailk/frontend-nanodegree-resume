@@ -22,7 +22,7 @@ bio.display = function() {
 
     $("#header").prepend(formattedRole).prepend(formattedName).prepend(formattedbiopic);
 
-    //I didn't like the welcome message so I didnt include it :)
+    //I didn't like the welcome message so I didn't include it :)
     //$("#header").append(formattedwelcomeMessage);
 
     if(bio.skills.length>0) {
@@ -199,5 +199,3 @@ education.display();
 
 $("#main").append(internationalizeButton);
 $("#mapDiv").append(googleMap);
-
-console.log("Finishing resumeBuilder.js");

@@ -6,7 +6,6 @@ var hideDescriptions = function(){
 
 
 $(window).bind("load", function(){
-    console.log("Starting interact.js");
     hideDescriptions();
 
 
